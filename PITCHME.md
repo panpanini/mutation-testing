@@ -40,3 +40,11 @@ Emphasis on quality
 - Ship _quality_ features as quick as possible
 
 ---
+
+<p><span class="slide-title">Maintaining quality</span></p>
+
+- QA |
+- Code Review |
+- Tests |
+
+---
