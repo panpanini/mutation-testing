@@ -48,3 +48,16 @@ Emphasis on quality
 - Tests |
 
 ---
+
+<p><span class="slide-title">Maintaining quality</span></p>
+
+- How do we know our tests are providing quality
+    - Use coverage to make sure that our tests are calling production code
+    - higher coverage, more insurance that changes introduced will not break existing code
+    - higher coverage, more insurance that new code _does what it says on the tin_
+
+---
+
+# Who ~watches~ tests the ~watch~ testmen?
+
+---
