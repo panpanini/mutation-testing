@@ -58,6 +58,12 @@ Emphasis on quality
 
 ---
 
-# Who ~watches~ tests the ~watch~ testmen?
+ Who -watches- tests the ~watch~ testmen?
+
+---
+
+<p><span class="slide-title">Maintaining quality</span></p>
+
+- How do we know that our tests are quality?
 
 ---
