@@ -67,3 +67,81 @@ Emphasis on quality
 - How do we know that our tests are quality?
 
 ---
+
+# Mutation testing
+
+---
+
+<p><span class="slide-title">Mutation testing</span></p>
+
+- proposed by Richard Lipton in 1971
+- computationally expensive, not a viable testing solution until recently
+
+---
+
+<p><span class="slide-title">Mutation testing steps</span></p>
+
+1. Introduce a fault into production code
+2. Run test suite
+3. Confirm if fault was detected or not
+4. Repeat
+
+---
+
+<p><span class="slide-title">Mutation testing the better way</span></p>
+1. find the test you want to verify
+2. Use coverage to determine what _product_ code is being tested
+3. introduce small faults into the product code
+4. Run the tests using this mutant code
+5. Confirm if the fault was detected or not
+5. repeat
+
+Note:
+animate to add the new steps in here maybe? rewrite to sound like we are just doing some setup
+
+---
+
+## Types of mutations
+
+Note:
+The competent programmer hypothesis states that most software faults introduced by experienced programmers are due to small syntactic errors.
+
+The coupling effect asserts that simple faults can cascade or couple to form other emergent faults. The coupling effect suggests that tests capable of catching first order mutations (single mutation) will also detect higher order mutations (multiple mutations) that contain these first order mutations.
+
+---
+
+TODO: source code
+
+---
+
+TODO: sample test suite
+
+---
+
+TODO: mutation test for suite
+
+---
+
+TODO: Types of mutations (equals, increments, return only true)
+
+---
+
+TODO: Android?
+
+---
+
+Pitest explanation
+
+---
+
+Pitest android gradle plugin
+
+---
+
+Pitest kotlin
+
+---
+
+example output?
+
+---
