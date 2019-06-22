@@ -68,6 +68,25 @@ Emphasis on quality
 
 ---
 
+# What are tests?
+
+---
+
+## What are tests?
+- a way of asserting that our assumptions about a piece of code are correct
+- "this code should behave in a certain way, if it doesn't, then the test should fail"
+- "if the code changes, the tests should fail"
+- "tests should fail"
+---
+
+@emoji[thinking_face]
+
+---
+
+# Lets fail some tests
+
+---
+
 # Mutation testing
 
 ---
