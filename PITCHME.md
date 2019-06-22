@@ -301,6 +301,7 @@ you might be thinking
 - mutation testing system
 - mutants stored in memory
 - outputs pretty reports
+- Gradle plugin @emoji[heart_eyes_cat]
 
 ---
 
