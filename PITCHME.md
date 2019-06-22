@@ -294,6 +294,13 @@ you might be thinking
 ---
 
 # Pitest
+![pitest](assets/img/pitest.png)
+---
+## Pitest
+- [pitest.org](www.pitest.org)
+- mutation testing system
+- mutants stored in memory
+- outputs pretty reports
 
 ---
 
