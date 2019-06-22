@@ -101,6 +101,14 @@ animate to add the new steps in here maybe? rewrite to sound like we are just do
 
 ---
 
+TODO: Create sample piece of code, then find mutations from it?
+``` kotlin
+
+
+```
+
+---
+
 ## Types of mutations
 
 Note:
