@@ -7,14 +7,14 @@
 
 <img align="right" width="150" height="150" src="assets/img/panini.png">
 - Matthew Vern / Panini
-- Twitter [@panini_ja](), [@panini_en]()
+- Twitter [@panini_ja]()
 - Github panpanini
 - Mercari, Inc
 - Software Engineer (Android)
 
 ---
-
-<p><span class="slide-title">My job</span></p>
+# My job
+<!-- <p><span class="slide-title">My job</span></p> -->
 
 - Client Engineer
 - Solving problems for our customers
@@ -108,12 +108,34 @@ The competent programmer hypothesis states that most software faults introduced 
 
 The coupling effect asserts that simple faults can cascade or couple to form other emergent faults. The coupling effect suggests that tests capable of catching first order mutations (single mutation) will also detect higher order mutations (multiple mutations) that contain these first order mutations.
 
----
-
-TODO: source code
+Lets have a look at some of the most common ones
 
 ---
+## Conditionals boundary
 
+replaces relational operators (<, <=, >, >=) with their boundary counterpart
+
+| Original | Mutated |
+|-|-|
+| < | <= |
+| <= | < |
+| > | >= |
+| >= | > |
+
+---
+## Conditionals boundary
+``` kotlin
+// original
+if (a < b) {
+  // do something
+}
+
+// mutated
+if (a <= b) {
+  // do something
+}
+```
+---
 TODO: sample test suite
 
 ---
