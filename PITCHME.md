@@ -171,7 +171,7 @@ Note:
 This small change can easily lead to an `IndexOutOfBoundsException`
 
 ---
-## Negate Conditionals
+## Negate Conditionals @emoji[smiling_imp]@emoji[smiling_imp]
 
 replaces conditional checks
 
@@ -183,7 +183,7 @@ replaces conditional checks
 | > | <= |
 
 ---
-## Negate Conditionals
+## Negate Conditionals @emoji[smiling_imp]@emoji[smiling_imp]
 
 ``` kotlin
 // original
@@ -206,6 +206,28 @@ fun buildModels() {
 Note:
 // add code reader thing to show difference?
 This small change can easily lead to an `IndexOutOfBoundsException`
+
+---
+## Remove void calls @emoji[smiling_imp]@emoji[smiling_imp]@emoji[smiling_imp]@emoji[smiling_imp]@emoji[smiling_imp]
+
+*removes* void method calls
+
+---
+## Remove void calls @emoji[smiling_imp]@emoji[smiling_imp]@emoji[smiling_imp]@emoji[smiling_imp]@emoji[smiling_imp]
+
+``` kotlin
+// original
+fun onNext(items: List<Item>) {
+    controller.items = items
+    controller.requestModelBuild()
+}
+
+// mutated
+fun onNext(items: List<Item>) {
+    controller.items = items
+
+}
+```
 
 ---
 TODO: sample test suite
