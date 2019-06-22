@@ -171,6 +171,43 @@ Note:
 This small change can easily lead to an `IndexOutOfBoundsException`
 
 ---
+## Negate Conditionals
+
+replaces conditional checks
+
+| Original | Mutated |
+|-|-|
+|==|!=|
+| != | == |
+| <= | > |
+| > | <= |
+
+---
+## Negate Conditionals
+
+``` kotlin
+// original
+fun buildModels() {
+    ProgressModelView_()
+      .title(title)
+      ...
+      .addIf(model.state == State.IN_PROGRESS)
+}
+
+// mutated
+fun buildModels() {
+    ProgressModelView_()
+      .title(title)
+      ...
+      .addIf(model.state != State.IN_PROGRESS)
+}
+```
+
+Note:
+// add code reader thing to show difference?
+This small change can easily lead to an `IndexOutOfBoundsException`
+
+---
 TODO: sample test suite
 
 ---
