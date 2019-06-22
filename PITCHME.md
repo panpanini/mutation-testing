@@ -6,14 +6,20 @@
 <p><span class="slide-title">About me</span></p>
 
 <img align="right" width="150" height="150" src="assets/img/panini.png">
-- Matthew Vern / Panini
+
+@snap[north-west bio-name] Matthew Vern @snapend
+
+@snap[west text-08 span-60]
 - Twitter [@panini_ja]()
 - Github panpanini
 - Mercari, Inc
-- Software Engineer (Android)
+- Software Engineer (Android) @snapend
+
+
 
 ---
-# My job
+@snap[north text-black span-100] @size[1.5em](My job) @snapend
+
 <!-- <p><span class="slide-title">My job</span></p> -->
 
 - Client Engineer
