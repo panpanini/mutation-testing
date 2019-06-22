@@ -285,11 +285,15 @@ TODO: Types of mutations (equals, increments, return only true)
 
 ---
 
-TODO: Android?
+## That's a lot of work you expect us to do there bud
+
+Note:
+you might be thinking
+"now hold up there, are you telling me that I now need to keep *another* test suite to test my test suite? what happens if the mutant code gets into my production code base? this all seems like a lot of work"
 
 ---
 
-Pitest explanation
+# Pitest
 
 ---
 
