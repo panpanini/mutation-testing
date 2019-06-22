@@ -89,6 +89,19 @@ What are birds?
 
 ---
 
+## Lets fail some tests
+
+- Tests assert code behaviour
+- change code behaviour
+- tests fail
+- ????
+- profit
+
+Note:
+why didn't anyone think of this earlier?
+
+---
+
 # Mutation testing
 
 ---
