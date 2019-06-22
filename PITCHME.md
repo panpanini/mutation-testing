@@ -70,6 +70,8 @@ Emphasis on quality
 
 # What are tests?
 
+Note:
+What are birds?
 ---
 
 ## What are tests?
