@@ -305,7 +305,25 @@ you might be thinking
 
 ---
 
-Pitest android gradle plugin
+## Gradle plugin
+
+- [szpak/gradle-pitest-plugin](https://github.com/szpak/gradle-pitest-plugin)
+- `apply plugin: pitest`
+- generates `pitest<Variant>` tasks
+
+
+---
+
+![y-u-do-dis](assets/img/pitest-gradle-plugin-no-android.png)
+
+---
+
+## Android Gradle plugin
+
+- [koral--/gradle-pitest-plugin](https://github.com/koral--/gradle-pitest-plugin/)
+- forked from szpak/gradle-pitest-plugin
+- works with Android projects
+- has some Android specific helpers (eg: generating mockable Android jar)
 
 ---
 
