@@ -136,6 +136,41 @@ if (a <= b) {
 }
 ```
 ---
+## Math @emoji[smiling_imp]
+
+replaces binary arithmetic operations
+
+| Original | Mutated |
+|-|-|
+| + | - |
+| - | + |
+| * | / |
+| / | * |
+
+---
+## Math @emoji[smiling_imp]
+
+``` kotlin
+// original
+fun getItemViewType(position: Int) {
+    when (items[position - HEADER_POSITION]) {
+      // return item type
+    }
+}
+
+// mutated
+fun getItemViewType(position: Int) {
+    when (items[position + HEADER_POSITION]) {
+      // return item type
+    }
+}
+```
+
+Note:
+// add code reader thing to show difference?
+This small change can easily lead to an `IndexOutOfBoundsException`
+
+---
 TODO: sample test suite
 
 ---
