@@ -327,10 +327,17 @@ you might be thinking
 
 ---
 
+example output
+
+---
+
+what else can we do with pitest?
+
+---
 Pitest kotlin
 
 ---
 
-example output?
+pros & cons
 
 ---
