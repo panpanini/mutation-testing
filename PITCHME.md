@@ -333,8 +333,23 @@ example output
 
 what else can we do with pitest?
 
+Note:
+- plugin architecture
+- Mutation Result listener (output)
+- MutationInterceptor (edit mutants)
 ---
 Pitest kotlin
+
+- [pitest/pitest-kotlin](https://github.com/pitest/pitest-kotlin)
+- MutationInterceptor
+- Removes mutants for Kotlin generated code
+
+Note:
+Don't care about testing if `Intrinsics.checkParameterIsNotNull();` is removed
+
+---
+
+
 
 ---
 
