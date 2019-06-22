@@ -238,7 +238,8 @@ fun onNext(items: List<Item>) {
 ```
 
 ---
-TODO: sample test suite
+TODO: for this tiny piece of code, we already have X mutations
+We have to run the test suite against *each* of these mutations to confirm that the test suite will correctly catch them
 
 ---
 
