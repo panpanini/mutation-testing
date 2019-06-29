@@ -8,8 +8,8 @@
 <img align="right" width="150" height="150" src="assets/img/panini.png">
 
 - Matthew Vern
-- Twitter [@panini_ja]()
-- Github panpanini
+- Twitter [@panini_ja](https://twitter.com/panini_ja)
+- Github [panpanini](https://github.com/panpanini)
 - Mercari, Inc
 - Software Engineer (Android)
 
@@ -35,7 +35,15 @@ Like many of you here today, my job as a client engineer is about providing valu
 - Ship features as quick as possible
 
 Note:
-Before a feature is released, the customer doesn't get any benifit out of it, so its our job to make sure we can get these features out as quick as we can.
+Before a feature is released, the customer doesn't get any benifit out of it, so its our job to make sure we can get these features out as quick as we can. To do this, we have many tools at our disposal:
+
+Architecture patterns to reduce the cost of reading the code
+
+OSS libraries to reduce the work required to implement common behaviour
+
+Continuous Integration & release pipelines to reduce the work required to release the app
+
+This is all well and good, but there is one small detail that we're forgetting
 ---
 
 <p><span class="slide-title">My job</span></p>
@@ -44,7 +52,8 @@ Before a feature is released, the customer doesn't get any benifit out of it, so
 - Ship _quality_ features as quick as possible
 
 Note:
-However, if we ship a feature that is buggy, or broken in some way, then this also doesn't provide benefit, and in extreme cases can reduce the benefit of the product. So really, we should be focused on shipping _quality_ features as quick as possible.
+However, if we ship a feature that is buggy, or broken in some way, then this also doesn't provide benefit, and in extreme cases can actually reduce the benefit of the product. So really, we should be focused on shipping _quality_ features as quick as possible.
+
 ---
 
 <p><span class="slide-title">Maintaining quality</span></p>
@@ -54,30 +63,42 @@ However, if we ship a feature that is buggy, or broken in some way, then this al
 - Tests |
 
 Note:
-so, what are some of the ways that we can ensure quality?
+so, what are some of the ways that we can ensure quality of the features we are shipping?
+
 One big way is with a Quality Assurance team. I mean the hint is in the name, but having someone else look at the feature you are working on is great for seeing how other people use the app, and is a good way to figure out bugs and unexpected user journeys, however the feedback loop is quite long, and so can be inefficient if employed improperly.
 
 Next, we have Code Review. Similar to QA, having another person look at the code is good for spotting small mistakes, or other oversights we may have made when implementing the feature, because hey, we're only human right? And while the feedback loop is not quite as long as QA, it still can take some time, and depends on how busy the other engineers on your team are.
 
-Finally, we come to tests. Tests can give us the quickest feedback in a way that we can understand easily - this code _right here_ is not performing how we expected it to.
+Finally, we come to tests. Tests can give us the quickest feedback in a way that we as engineers can understand easily
+
+- this code _right here_ is not doing what we expected it to do
 
 ---
 
 <p><span class="slide-title">Maintaining quality</span></p>
 
 - How do we know our tests are providing quality
-    - Use coverage to make sure that our tests are calling production code
-    - insurance that changes introduced will not break existing code
-    - insurance that new code _does what it says on the tin_
+    - Use coverage to make sure that our tests are calling production code |
+    - changes introduced will not break existing code |
+    - new code _does what it says on the tin_ |
 
 
 TODO: find a better word than providing
 Note:
 So how do we know that our tests are providing quality?
-well, we can use code coverage right? by using coverage, we can show how much of our code is being run by the tests, and so we then know how safe we are when changing the code.
+
+Well, we can use code coverage right? by using coverage, we can show how much of our code is being run by the tests, and so we then know how safe we are when changing the code.
+
+Code coverage can give us insurance that any changes we introduce won't break existing code
+
+Code coverage can also give us insurance that newly added features are working as intended
+
 ---
 
  ## Who w̶a̶t̶c̶h̶e̶s̶tests the w̶a̶t̶c̶h̶testmen?
+
+ Note:
+ In my research every talk on mutation testing had to have this slide, so I had to continue the tradition. who watches the watchmen?
  TODO: fix the text here
 
 ---
@@ -92,23 +113,19 @@ How do we know the quality of our tests?
 
 ---
 
-# What are tests?
-
-Note:
-What are birds?
----
-
 ## What are tests?
-- a way of asserting that our assumptions about a piece of code are correct
+
+- asserting that our assumptions about a piece of code are correct |
+- binary assertions of code correctness |
 
 
 Note:
+Unit test are a way of confirming that a certain piece of code is working the way we expect it to work.
+
 - "this code should behave in a certain way, if it doesn't, then the test should fail"
 - "if the code changes, the tests should fail"
 - "tests should fail"
----
-
-@emoji[thinking_face]
+- if we change the code, the tests should fail
 
 ---
 
@@ -118,13 +135,14 @@ Note:
 
 ## Lets fail some tests
 
-- Tests assert code behaviour
+- Unit tests assert code behaviour
 - change code behaviour
 - tests fail
 - ????
 - profit
 
 Note:
+Unit tests should fail
 why didn't anyone think of this earlier?
 
 ---
@@ -143,9 +161,9 @@ Like all good ideas, someone came up with it already. Mutation testing was origi
 
 <p><span class="slide-title">Mutation testing steps</span></p>
 
-1. Introduce a fault into production code
+1. Create a mutant
 2. Run test suite
-3. Confirm if fault was detected or not
+3. Confirm if mutant was detected or not
 4. Repeat
 
 Note:
@@ -154,6 +172,28 @@ first, we introduce a fault or mutation into the production code.
 next, we run our test suite and collect the results.
 and then third, we confirm if the fault was detected or not.
 We consider the fault "detected" if at least 1 test in the suite has failed.
+
+---
+
+## What is a mutant?
+
+- A mutant is a biological entity which has undergone a change in its genetic structure.
+
+Note:
+If you have a look at Wikipedia, they describe a mutant as being a biological entity which has undergone a change in its genetic structure.
+
+Basically, you have one thing over here. you change it slightly, and then you get another thing. that other thing is a mutant of the first.
+
+In our case, we're talking about code, so we can rewrite the definition to be something like this
+
+---
+
+## What is a mutant?
+
+- A mutant is a code block which has undergone a change in its structure.
+
+Note:
+We have a block of code, we change it slightly, which produces our mutant. 
 
 ---
 
@@ -169,17 +209,19 @@ TODO: explain code
 
 ## Creating mutations
 
-| - Competent Programmer Hypothesis
-| - Coupling Effect
+ - Competent Programmer Hypothesis |
+ - Coupling Effect |
 
 Note:
 Now we could go randomly changing code to create mutants, but remember that for each mutant we create, we have to run all the tests against it to make sure it is killed, so we want to be methodical about the changes that we make.
 
-This is actually a fairly well researched area, so if you Google you can find lists of mutators for object-oriented languages. Lets take a look at a couple of these as an example, arranged in order of perceived evilness.
+This is actually a fairly well researched area, so if you Google you can find lists of mutators for object-oriented languages, however the basic idea behind creating mutations follows these two theories.
 
-<!-- The competent programmer hypothesis states that most software faults introduced by experienced programmers are due to small syntactic errors.
+The competent Programmer Hypothesis states that bugs introduced by competent programmers are more often than not small syntatical errors, which are often hard to notice during code review.
 
-The coupling effect asserts that simple faults can cascade or couple to form other emergent faults. The coupling effect suggests that tests capable of catching first order mutations (single mutation) will also detect higher order mutations (multiple mutations) that contain these first order mutations. -->
+Secondly, the Coupling effect states that small issues will stack up to create big issues, so if we can reduce small issues then we can also reduce the big issues at the same time.
+
+With that in mind, lets take a look at a couple of these as an example, arranged in order of perceived evilness, which is a metric I made up based on how difficult I think these types of faults are to find.
 
 ---
 ## Conditionals boundary
@@ -209,7 +251,7 @@ if (a <= b) {
 }
 ```
 Note:
-So if we apply this to our previous code example, we come up with a mutant that looks like this. Now - thats pretty evil, thats the kind of thing I'm not sure I would notice in a code review.
+So if we apply this to our previous code example, we come up with a mutant that looks like this. Now - thats pretty evil, this is definitely the kind of thing that could slip through code review, and this kind of edge case is unlikely to be covered by tests, unless you have gone out of your way to write a test specifically for this boundary.
 
 Our next contender is slightly more evil, the math operator
 ---
@@ -327,6 +369,9 @@ and to that, I say *no*.
 
 # Pitest
 ![pitest](assets/img/pitest.png)
+
+Note:
+Let me introduce PITest!
 ---
 ## Pitest
 - [pitest.org](www.pitest.org)
@@ -335,6 +380,12 @@ and to that, I say *no*.
 - outputs pretty reports
 - Gradle plugin @emoji[heart_eyes_cat]
 
+Note:
+PItest is a mutation testing system for the JVM, and it has some pretty sweet features. It will automatically generate mutations based on the operator set provided. Also, the mutations are generated by editing the bytecode of a class after it has been loaded by the ClassLoader, which means that
+a) mutations are never saved to disk
+b) we don't have to pay the cost of loading the class for each test, so we gain some performance.
+
+But one of the coolest features is that someone has written a gradle plugin, so we can integrate it directly into our Android app
 ---
 
 ## Gradle plugin
@@ -343,11 +394,16 @@ and to that, I say *no*.
 - `apply plugin: pitest`
 - generates `pitest<Variant>` tasks
 
+Note:
+The gradle plugin for pitest is great, because its almost plug & play. After importing the plugin, and setting up the set of target classes, the plugin will generate pitest tasks for each build variant, which will do _everything_ for you. The only downside about it...
 
 ---
 
 ![y-u-do-dis](assets/img/pitest-gradle-plugin-no-android.png)
 
+Note:
+is that it doesn't work with Android projects on its own. :innocent:
+However, there is a fork that does work, so lets take a look at that
 ---
 
 ## Android Gradle plugin
@@ -357,18 +413,29 @@ and to that, I say *no*.
 - works with Android projects
 - has some Android specific helpers (eg: generating mockable Android jar)
 
----
+Note:
+so koral on github has forked and fixed the pitest gradle plugin to work with Android, and added some extra helpers that are useful for Android projects, such as support for Robolectric. Installation is the same as the other gradle plugin, just apply the plugin to your build.gradle file and then declare which classes to test
+---?code=src/main/kotlin/build.gradle.kts&lang=kotlin@name=build.gradle.kts
 
-example output
-
----
-
-what else can we do with pitest?
+## Android Gradle plugin
 
 Note:
-- plugin architecture
-- Mutation Result listener (output)
-- MutationInterceptor (edit mutants)
+@[8](apply the plugin)
+@[11-16](add the pitest block)
+@[13](set the target classes)
+
+---
+
+![output](assets/img/pitest-output.png)
+
+Note:
+Its as easy as that! Then, we get this pretty report showing us how many missed conditions we have in our tests :)
+---
+
+# Pitest tips & tricks
+
+Note:
+Finally I'd like to finish on a couple of tips and tricks for getting your pitest setup working nicely
 ---
 Pitest kotlin
 
@@ -377,12 +444,20 @@ Pitest kotlin
 - Removes mutants for Kotlin generated code
 
 Note:
-Don't care about testing if `Intrinsics.checkParameterIsNotNull();` is removed
+First, if you're using kotlin, then the pitest-kotlin plugin is great.
+Don't care about testing if `Intrinsics.checkParameterIsNotNull();` is removed, so this plugin will remove these mutations before they are tested, cleaning up the reports, and speeding up the test runtime.
 
+---
+
+## Run PITest on Unit tests only
+
+
+Note:
+Integration tests have too many potential variables, + could potentially be connected to DBs etc which will do bad things if you remove certain calls without mocking.
 ---
 
 ## Takeaways
 
-- Mutation Testing is assurance your tests are doing their job
-- Pitest is smart enough to know which tests to run, but slow tests will still be slow
--
+- Our job is to ship *quality* features, fast
+- Mutation testing helps us ensure *quality*
+- PITest helps us do that *fast*
