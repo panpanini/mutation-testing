@@ -3,21 +3,32 @@
 
 ---
 
-<p><span class="slide-title">About me</span></p>
+@snap[north]
+## About me
+@snapend
 
-<img align="right" width="150" height="150" src="assets/img/panini.png">
 
-- Matthew Vern
-- Twitter [@panini_ja](https://twitter.com/panini_ja)
-- Github [panpanini](https://github.com/panpanini)
-- Mercari, Inc
-- Software Engineer (Android)
+@snap[east]
+![panini](assets/img/panini.png)
+@snapend
+
+@snap[west span-70]
+<ul>
+  <li>Matthew Vern</li>
+  <li>Twitter [@panini_ja](https://twitter.com/panini_ja)</li>
+  <li>Github [panpanini](https://github.com/panpanini)</li>
+  <li>Mercari, Inc</li>
+  <li>Software Engineer (Android)</li>
+</ul>
+@snapend
 
 Note:
 I'm a Software Engineer focusing on Android working at Mercari, a flea market application based in Japan and America.
 ---
 
-<p><span class="slide-title">My job</span></p>
+@snap[north]
+## My job
+@snapend
 
 - Client Engineer
 - Solving problems for our customers
@@ -29,7 +40,9 @@ Like many of you here today, my job as a client engineer is about providing valu
 
 ---
 
-<p><span class="slide-title">My job</span></p>
+@snap[north]
+## My job
+@snapend
 
 - A non-shipped feature doesn't provide benefit
 - Ship features as quick as possible
@@ -46,7 +59,9 @@ Continuous Integration & release pipelines to reduce the work required to releas
 This is all well and good, but there is one small detail that we're forgetting
 ---
 
-<p><span class="slide-title">My job</span></p>
+@snap[north]
+## My job
+@snapend
 
 - A shipped, broken feature doesn't provide benefit
 - Ship _quality_ features as quick as possible
@@ -56,7 +71,9 @@ However, if we ship a feature that is buggy, or broken in some way, then this al
 
 ---
 
-<p><span class="slide-title">Maintaining quality</span></p>
+@snap[north span-100]
+## Maintaining quality
+@snapend
 
 - QA |
 - Code Review |
@@ -75,15 +92,15 @@ Finally, we come to tests. Tests can give us the quickest feedback in a way that
 
 ---
 
-<p><span class="slide-title">Maintaining quality</span></p>
+@snap[north span-100]
+## Maintaining quality
+@snapend
 
 - How do we know our tests are providing quality
     - Use coverage to make sure that our tests are calling production code |
     - changes introduced will not break existing code |
-    - new code _does what it says on the tin_ |
+    - new code does what it says on the tin |
 
-
-TODO: find a better word than providing
 Note:
 So how do we know that our tests are providing quality?
 
@@ -95,17 +112,15 @@ Code coverage can also give us insurance that newly added features are working a
 
 ---
 
- ## Who w̶a̶t̶c̶h̶e̶s̶tests the w̶a̶t̶c̶h̶testmen?
-
- Note:
- In my research every talk on mutation testing had to have this slide, so I had to continue the tradition. who watches the watchmen?
- TODO: fix the text here
+ ## Who watches the watchmen?
 
 ---
 
-<p><span class="slide-title">Maintaining quality</span></p>
+@snap[north span-100]
+## Maintaining quality
+@snapend
 
-- How do we know that our tests are quality?
+### How do we know that our *tests* are quality?
 
 
 Note:
@@ -113,7 +128,9 @@ How do we know the quality of our tests?
 
 ---
 
-## What are tests?
+@snap[north span-100]
+## What are tests
+@snapend
 
 - asserting that our assumptions about a piece of code are correct |
 - binary assertions of code correctness |
@@ -132,8 +149,9 @@ Unit test are a way of confirming that a certain piece of code is working the wa
 # Lets fail some tests
 
 ---
-
+@snap[north span-100]
 ## Lets fail some tests
+@snapend
 
 - Unit tests assert code behaviour
 - change code behaviour
@@ -151,15 +169,18 @@ why didn't anyone think of this earlier?
 
 ---
 
-<p><span class="slide-title">Mutation testing</span></p>
+@snap[north span-100]
+## Mutation testing
+@snapend
 
 - proposed by Richard Lipton in 1971
 - computationally expensive, not a viable testing solution until recently
 Note:
 Like all good ideas, someone came up with it already. Mutation testing was originally proposed back in the 70's, however it has only recently become viable thanks to advancements in computer processing.
 ---
-
-<p><span class="slide-title">Mutation testing steps</span></p>
+@snap[north span-100]
+## Mutation testing steps
+@snapend
 
 1. Create a mutant
 2. Run test suite
@@ -175,7 +196,10 @@ We consider the fault "detected" if at least 1 test in the suite has failed.
 
 ---
 
+@snap[north span-100]
 ## What is a mutant?
+@snapend
+
 
 - A mutant is a biological entity which has undergone a change in its genetic structure.
 
@@ -188,26 +212,36 @@ In our case, we're talking about code, so we can rewrite the definition to be so
 
 ---
 
+@snap[north span-100]
 ## What is a mutant?
+@snapend
 
 - A mutant is a code block which has undergone a change in its structure.
 
 Note:
-We have a block of code, we change it slightly, which produces our mutant. 
+We have a block of code, we change it slightly, which produces our mutant.
 
----
+---?code=src/main/kotlin/SessionController.kt&lang=kotlin
 
-TODO: Create sample piece of code, then find mutations from it?
-``` kotlin
-
-
-```
 Note:
-Alright, lets start mutating some code! Take this function as an example
-TODO: explain code
+Alright, lets start mutating some code! Take this class as an example. There are 3 functions here:
+
+@[5-9](setSessions)
+@[6-7](clear sessions, add all new)
+@[8](request that the current models be built)
+@[11-15](buildModels - generates the models, adds to the controller)
+@[13](calls generate models)
+@[14](adds each one to the Controller)
+@[17-33](generateModels)
+@[19](Takes the list of sessions)
+@[21](Creates a SessionModelInstance)
+@[22-30](Sets the session data to the model)
+
 ---
 
+@snap[north span-100]
 ## Creating mutations
+@snapend
 
  - Competent Programmer Hypothesis |
  - Coupling Effect |
@@ -224,9 +258,11 @@ Secondly, the Coupling effect states that small issues will stack up to create b
 With that in mind, lets take a look at a couple of these as an example, arranged in order of perceived evilness, which is a metric I made up based on how difficult I think these types of faults are to find.
 
 ---
+@snap[north span-100]
 ## Conditionals boundary
+@snapend
 
-replaces relational operators (<, <=, >, >=) with their boundary counterpart
+replaces relational operators with boundary counterpart
 
 | Original | Mutated |
 |-|-|
@@ -238,24 +274,51 @@ replaces relational operators (<, <=, >, >=) with their boundary counterpart
 Note:
 First lets start off with a fairly simple, but common one, the conditionals boundary operator. Mutation operators generally consist of two things - the original production code, and the code it should be mutated into.
 ---
+@snap[north span-100]
 ## Conditionals boundary
+@snapend
+@snap[midpoint]
 ``` kotlin
 // original
-if (a < b) {
-  // do something
-}
-
-// mutated
-if (a <= b) {
+if (currentTime < startTime) {
   // do something
 }
 ```
+@snapend
 Note:
 So if we apply this to our previous code example, we come up with a mutant that looks like this. Now - thats pretty evil, this is definitely the kind of thing that could slip through code review, and this kind of edge case is unlikely to be covered by tests, unless you have gone out of your way to write a test specifically for this boundary.
 
 Our next contender is slightly more evil, the math operator
 ---
-## Math @emoji[smiling_imp]
+@snap[north span-100]
+## Conditionals boundary
+@snapend
+``` kotlin
+// mutated
+if (currentTime <= startTime) {
+  // do something
+}
+```
+---
+@snap[north span-100]
+## Conditionals boundary
+@snapend
+``` kotlin
+// original
+if (currentTime < startTime) {
+  // do something
+}
+
+// mutated
+if (currentTime <= startTime) {
+  // do something
+}
+```
+---
+@snap[north span-100]
+## Math
+@snapend
+
 
 replaces binary arithmetic operations
 
@@ -269,15 +332,19 @@ replaces binary arithmetic operations
 Note:
 This lil critter will take your nicely crafted binary arithmetic and swap it all around. for example
 ---?code=src/main/kotlin/math.kt&lang=kotlin
-## Math @emoji[smiling_imp]
+@snap[north span-100]
+## Math
+@snapend
 
 Note:
 did you notice the change?
-@[3, 10](Our minus operator)
 This one character change can easily lead to an `IndexOutOfBoundsException`
 
 ---
-## Negate Conditionals @emoji[smiling_imp]@emoji[smiling_imp]
+@snap[north span-100]
+## Negate Conditionals
+@snapend
+
 
 replaces conditional checks
 
@@ -291,7 +358,9 @@ replaces conditional checks
 Note:
 Next we have the negate conditionals operator - are you seeing a pattern here? Here we take conditional checks, and reverse them.
 ---
-## Negate Conditionals @emoji[smiling_imp]@emoji[smiling_imp]
+@snap[north span-100]
+## Negate Conditionals
+@snapend
 
 ``` kotlin
 // original
@@ -315,7 +384,9 @@ Note:
 This one is pretty evil too, as even just this change on its own can lead to wildly different behaviour of our app, in this case showing the Progress view whenever the state is _not_ in progress.
 
 ---
-## Remove void calls @emoji[smiling_imp]@emoji[smiling_imp]@emoji[smiling_imp]@emoji[smiling_imp]@emoji[smiling_imp]
+@snap[north span-100]
+## Remove void calls @emoji[smiling_imp]
+@snapend
 
 *removes* void method calls
 
@@ -323,7 +394,9 @@ Note:
 The last mutator I want to show is the Remove void calls operator, this one straight up removes calls to void methods. just deletes them. gone.
 
 ---
-## Remove void calls @emoji[smiling_imp]@emoji[smiling_imp]@emoji[smiling_imp]@emoji[smiling_imp]@emoji[smiling_imp]
+@snap[north span-100]
+## Remove void calls @emoji[smiling_imp]
+@snapend
 
 ``` kotlin
 // original
@@ -341,12 +414,15 @@ fun onNext(items: List<Item>) {
 Note:
 Back to our code from before, and bam, we're no longer building the models in our EpoxyController, so now our RecyclerView never gets updated.
 This might sound like not that big of a deal, I think more often than not we forget to test void calls in functions, as to do so you have to properly set up mocks and actively call them.
----
 
-<p><span class="slide-title">Mutation testing the better way</span></p>
+---
+@snap[north span-100]
+## Mutation testing
+### The better way
+@snapend
 
 1. Introduce a fault into production code
-| 2. Use code coverage to determine which tests to run
+2. Use code coverage to determine which tests to run
 3. Run tests
 4. Confirm if fault was detected or not
 5. Repeat
@@ -358,22 +434,50 @@ So, for our short snippet of code, we already have 4 mutations that we need to r
 instead, if we use code coverage to find out which tests are actually calling this section of code, we can restrict our test runs to only those specific tests, which greatly reduces the number of tests we have to run, and so also reduces the time spent testing mutations to a more reasonable level.
 
 ---
+@snap[north span-100]
+## So what?
+@snapend
 
+Note:
+We have seen how to create mutations from our code, but what does it really mean? Obviously we're not just going to delete lines from our code, so how does this help us? Lets take a quick look at an example.
+
+Show code coverage
+
+Edit code
+
+Show coverage hasn't changed
+
+---
+@snap[north span-100]
+## Why mutation testing
+@snapend
+
+- Code coverage, but better
+
+Note:
+So hopefully from this small demo, you've seen why code coverage alone is not enough. Even though we had 100% code coverage, when we mutated our code, we saw that our coverage didn't change, and our tests still passed. What this tells us is that our test suite in its current state doesn't check all possible code paths, so changes could sneak into our codebase, and our tests wouldn't warn us about them. Finding these un-checked code paths is what mutation testing is so useful for.
+
+---
 ## That's a lot of work you expect us to do there bud
 
 Note:
 you might be thinking
-"now hold up there, are you telling me that I now need to keep *another* test suite to test my test suite? what happens if the mutant code gets into my production code base? this all seems like a lot of work"
+"now hold up there, this is cool and all, but are you telling me that I now need to keep *another* test suite to test my test suite? what happens if the mutant code gets into my production code base? I thought we were supposed to be shipping things quickly? this all seems like a lot of work"
 and to that, I say *no*.
 ---
 
-# Pitest
+@snap[north span-100]
+## Pitest
+@snapend
 ![pitest](assets/img/pitest.png)
 
 Note:
 Let me introduce PITest!
 ---
+@snap[north span-100]
 ## Pitest
+@snapend
+
 - [pitest.org](www.pitest.org)
 - mutation testing system
 - mutants stored in memory
@@ -387,8 +491,10 @@ b) we don't have to pay the cost of loading the class for each test, so we gain 
 
 But one of the coolest features is that someone has written a gradle plugin, so we can integrate it directly into our Android app
 ---
-
+@snap[north span-100]
 ## Gradle plugin
+@snapend
+
 
 - [szpak/gradle-pitest-plugin](https://github.com/szpak/gradle-pitest-plugin)
 - `apply plugin: pitest`
@@ -399,14 +505,17 @@ The gradle plugin for pitest is great, because its almost plug & play. After imp
 
 ---
 
+@snap[midpoint span-100]
 ![y-u-do-dis](assets/img/pitest-gradle-plugin-no-android.png)
+@snapend
 
 Note:
 is that it doesn't work with Android projects on its own. :innocent:
 However, there is a fork that does work, so lets take a look at that
 ---
-
+@snap[north span-100]
 ## Android Gradle plugin
+@snapend
 
 - [koral--/gradle-pitest-plugin](https://github.com/koral--/gradle-pitest-plugin/)
 - forked from szpak/gradle-pitest-plugin
@@ -417,19 +526,30 @@ Note:
 so koral on github has forked and fixed the pitest gradle plugin to work with Android, and added some extra helpers that are useful for Android projects, such as support for Robolectric. Installation is the same as the other gradle plugin, just apply the plugin to your build.gradle file and then declare which classes to test
 ---?code=src/main/kotlin/build.gradle.kts&lang=kotlin@name=build.gradle.kts
 
+@snap[north span-100]
 ## Android Gradle plugin
+@snapend
 
 Note:
 @[8](apply the plugin)
-@[11-16](add the pitest block)
+@[11-15](add the pitest block)
+@[12](set this to false if using Robolectric)
 @[13](set the target classes)
+@[14](set the output format)
 
 ---
 
-![output](assets/img/pitest-output.png)
+## Demo
 
 Note:
-Its as easy as that! Then, we get this pretty report showing us how many missed conditions we have in our tests :)
+So, lets see it in action shall we?
+
+Gradle plugin
+
+Run pitest
+
+Show output
+
 ---
 
 # Pitest tips & tricks
@@ -437,7 +557,10 @@ Its as easy as that! Then, we get this pretty report showing us how many missed 
 Note:
 Finally I'd like to finish on a couple of tips and tricks for getting your pitest setup working nicely
 ---
-Pitest kotlin
+@snap[north span-100]
+## Pitest kotlin
+@snapend
+
 
 - [pitest/pitest-kotlin](https://github.com/pitest/pitest-kotlin)
 - MutationInterceptor
@@ -456,7 +579,16 @@ Note:
 Integration tests have too many potential variables, + could potentially be connected to DBs etc which will do bad things if you remove certain calls without mocking.
 ---
 
+## Run PITest on CI
+
+Note:
+PITest is smart, and will only run tests against mutations that have coverage, however it still isn't the fastest. For example, the monolithic project I'm working on now takes about 6 minutes to run all the tests, and roughly 10 minutes to run pitest. This is a bit too long for my liking to run as a git-hook, so for this project we set up pitest to run on CI when a Pull Request is made. However, if you have a more modularized project, you could run pitest as a git-hook before you push to your remote, to make sure that your tests are covering all possible code paths
+
+---
+@snap[north span-100]
 ## Takeaways
+@snapend
+
 
 - Our job is to ship *quality* features, fast
 - Mutation testing helps us ensure *quality*

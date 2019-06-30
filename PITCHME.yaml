@@ -3,18 +3,20 @@
 theme            : template
 
 theme-background : [ "gradient(180deg, white 75%, black 25%)" ]
-theme-headline   : [ "Montserrat", "#93C54B", "none" ]
-theme-byline     : [ "Montserrat", "#111111", "none" ]
-theme-text       : [ "Raleway", "#1C1C1C", "none" ]
-theme-links      : [ "#62A503", "#718C00" ]
-theme-controls   : [ "#C0C0C0" ]
+theme-headline   : [ "Averta", "#5e6df2", "none" ]
+theme-byline     : [ "Averta", "#999999", "none" ]
+theme-text       : [ "Averta", "#1C1C1C", "none" ]
+theme-links      : [ "#5e6df2", "#718C00" ]
+theme-controls   : [ "#FFFFFF" ]
 theme-code       : [ "Fira Code" ]
 
 highlight : tomorrow
 theme-override   : assets/css/PITCHME.css
 published: false
 # theme-override : assets/css/PITCHME.codemax.css
-# # logo : assets/image/logo.png
+logo : assets/img/logo.png
+logo-position : bottom-left
+pro-menus-hidden : true
 # background : assets/image/background.png
 # transition : none
 # # layout : top-left
