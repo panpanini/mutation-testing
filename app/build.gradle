@@ -1,0 +1,71 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+apply plugin: 'kotlin-kapt'
+
+apply plugin: 'jacoco'
+
+apply plugin: 'pl.droidsonroids.pitest'
+
+kapt {
+    correctErrorTypes = true
+}
+
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        applicationId "jp.co.panpanini"
+        minSdkVersion 21
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            testCoverageEnabled true
+        }
+    }
+
+    testOptions {
+        unitTests {
+            returnDefaultValues true
+        }
+        unitTests.all {
+            jacoco {
+                includeNoLocationClasses true
+            }
+        }
+    }
+}
+
+pitest {
+    targetClasses = ['jp.co.panpanini.*']
+    excludeMockableAndroidJar = false
+    outputFormats = ['XML', 'HTML']
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'androidx.appcompat:appcompat:1.0.2'
+    testImplementation 'junit:junit:4.12'
+    testImplementation 'org.mockito:mockito-android:2.28.2'
+    testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:2.1.0"
+    testImplementation "org.robolectric:robolectric:4.3"
+    testImplementation "org.assertj:assertj-core:3.11.1"
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+
+    implementation 'com.airbnb.android:epoxy:3.6.0'
+    kapt 'com.airbnb.android:epoxy-processor:3.6.0'
+
+    implementation project(':uicomponents')
+    implementation project(':models')
+}
