@@ -125,24 +125,29 @@ Code coverage can also give us insurance that newly added features are working a
 
 Note:
 How do we know the quality of our tests?
+---
 
+@snap[north span-100]
+## What are tests
+@snapend
 ---
 
 @snap[north span-100]
 ## What are tests
 @snapend
 
-- asserting that our assumptions about a piece of code are correct |
-- binary assertions of code correctness |
+- asserting that our assumptions about a piece of code are correct
+- binary assertions of code correctness
 
 
 Note:
 Unit test are a way of confirming that a certain piece of code is working the way we expect it to work.
 
 - "this code should behave in a certain way, if it doesn't, then the test should fail"
-- "if the code changes, the tests should fail"
-- "tests should fail"
-- if we change the code, the tests should fail
+
+As engineers, we're used to trying to make tests pass - if our tests don't pass then we can't ship our features, so we are always looking for that happy green checkmark to tell us that our tests are all passing.
+
+However, what we forget is that _tests are designed to fail_. Our tests are supposed to fail to tell us that something is going wrong.
 
 ---
 
@@ -160,7 +165,8 @@ Unit test are a way of confirming that a certain piece of code is working the wa
 - profit
 
 Note:
-Unit tests should fail
+In order to confirm that a unit test is working, we should make sure that they fail when we expect them to. And our expectations is that they will fail when the code no longer behaves the same way, so if we change the code behaviour, and our tests fail, we know that it is providing quality.
+
 why didn't anyone think of this earlier?
 
 ---
@@ -176,7 +182,7 @@ why didn't anyone think of this earlier?
 - proposed by Richard Lipton in 1971
 - computationally expensive, not a viable testing solution until recently
 Note:
-Like all good ideas, someone came up with it already. Mutation testing was originally proposed back in the 70's, however it has only recently become viable thanks to advancements in computer processing.
+Like all good ideas, someone came up with it already. Mutation testing was originally proposed back in the 1970s, however it has only recently become viable thanks to advancements in computer processing. 
 ---
 @snap[north span-100]
 ## Mutation testing steps
