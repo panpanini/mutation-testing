@@ -277,43 +277,21 @@ First lets start off with a fairly simple, but common one, the conditionals boun
 @snap[north span-100]
 ## Conditionals boundary
 @snapend
-@snap[midpoint]
 ``` kotlin
 // original
 if (currentTime < startTime) {
   // do something
 }
+
+// mutated
+if (currentTime <= startTime) {
+  // do something
+}
 ```
-@snapend
 Note:
 So if we apply this to our previous code example, we come up with a mutant that looks like this. Now - thats pretty evil, this is definitely the kind of thing that could slip through code review, and this kind of edge case is unlikely to be covered by tests, unless you have gone out of your way to write a test specifically for this boundary.
 
 Our next contender is slightly more evil, the math operator
----
-@snap[north span-100]
-## Conditionals boundary
-@snapend
-``` kotlin
-// mutated
-if (currentTime <= startTime) {
-  // do something
-}
-```
----
-@snap[north span-100]
-## Conditionals boundary
-@snapend
-``` kotlin
-// original
-if (currentTime < startTime) {
-  // do something
-}
-
-// mutated
-if (currentTime <= startTime) {
-  // do something
-}
-```
 ---
 @snap[north span-100]
 ## Math
