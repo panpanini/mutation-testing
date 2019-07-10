@@ -63,6 +63,19 @@ class SessionControllerTest {
         verify(sessions).addAll(items)
     }
 
+
+    //TODO: Put a test here 🍺
+
+
+
+    @Test
+    fun `generateModels should set the imageUrl to an empty string if speaker profileImage is empty`() {
+        val sessions: List<Session> = listOf(session.copy(speaker = speaker.copy(profileImage = "")))
+
+        val result = target.generateModels(sessions).first()
+
+    }
+
     @Test
     fun `generateModels with an empty list should return an empty list`() {
         val sessions: List<Session> = listOf()
@@ -106,17 +119,6 @@ class SessionControllerTest {
         val result = target.generateModels(sessions).first()
 
         Assertions.assertThat(result.name).isEqualTo(session.speaker.fullName)
-    }
-
-    @Test
-    fun `generateModels should set the imageUrl to an empty string if speaker profileImage is empty`() {
-        val sessions: List<Session> = listOf(session.copy(speaker = speaker.copy(profileImage = "")))
-
-
-
-        val result = target.generateModels(sessions).first()
-
-//        Assertions.assertThat(result.imageUrl).isNull()
     }
 
     @Test
