@@ -182,7 +182,7 @@ why didn't anyone think of this earlier?
 - proposed by Richard Lipton in 1971
 - computationally expensive, not a viable testing solution until recently
 Note:
-Like all good ideas, someone came up with it already. Mutation testing was originally proposed back in the 1970s, however it has only recently become viable thanks to advancements in computer processing. 
+Like all good ideas, someone came up with it already. Mutation testing was originally proposed back in the 1970s, however it has only recently become viable thanks to advancements in computer processing.
 ---
 @snap[north span-100]
 ## Mutation testing steps
@@ -425,9 +425,15 @@ instead, if we use code coverage to find out which tests are actually calling th
 Note:
 We have seen how to create mutations from our code, but what does it really mean? Obviously we're not just going to delete lines from our code, so how does this help us? Lets take a quick look at an example.
 
+terminal: ⌥ + fn + F12
+
 Show code coverage
+./jacocoReport.sh
+
+should take 20 seconds
 
 Edit code
+
 
 Show coverage hasn't changed
 
@@ -439,7 +445,7 @@ Show coverage hasn't changed
 - Code coverage, but better
 
 Note:
-So hopefully from this small demo, you've seen why code coverage alone is not enough. Even though we had 100% code coverage, when we mutated our code, we saw that our coverage didn't change, and our tests still passed. What this tells us is that our test suite in its current state doesn't check all possible code paths, so changes could sneak into our codebase, and our tests wouldn't warn us about them. Finding these un-checked code paths is what mutation testing is so useful for.
+So hopefully from this small demo, you've seen why code coverage alone is not enough. Even though we had 100% code coverage, when we mutated our code, we saw that our coverage didn't change, and our tests still passed. What this tells us is that our test suite in its current state is missing test cases, so changes could sneak into our codebase, and our tests wouldn't warn us about them. Finding these un-checked code paths is what mutation testing is so useful for.
 
 ---
 ## That's a lot of work you expect us to do there bud
@@ -502,7 +508,7 @@ However, there is a fork that does work, so lets take a look at that
 @snapend
 
 - [koral--/gradle-pitest-plugin](https://github.com/koral--/gradle-pitest-plugin/)
-- forked from szpak/gradle-pitest-plugin
+- written by Karol Wrótniak, forked from szpak/gradle-pitest-plugin
 - works with Android projects
 - has some Android specific helpers (eg: generating mockable Android jar)
 
@@ -531,8 +537,20 @@ So, lets see it in action shall we?
 Gradle plugin
 
 Run pitest
+./gradlew pitestDebug
+about 43 seconds
 
 Show output
+
+Explain Green lines - mutation was caught, test failed
+
+Explain Red lines - mutation not caught, tests pass
+
+How can we fix red lines? - write tests
+
+Test - `setSessions should update the controller`()
+./gradlew app:clean pitestDebug
+about 15 seconds
 
 ---
 
