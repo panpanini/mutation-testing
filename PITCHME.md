@@ -541,6 +541,7 @@ Run pitest
 about 43 seconds
 
 Show output
+./openPitest.sh
 
 Explain Green lines - mutation was caught, test failed
 
@@ -551,6 +552,10 @@ How can we fix red lines? - write tests
 Test - `setSessions should update the controller`()
 ./gradlew app:clean pitestDebug
 about 15 seconds
+
+./openPitest.sh
+
+Here we fixed the red line by adding a test for this line specifically. So what we have done here, is found a section of our app that we were not testing properly, and added a test to cover it.
 
 ---
 
