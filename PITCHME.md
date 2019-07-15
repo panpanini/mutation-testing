@@ -67,7 +67,7 @@ This is all well and good, but there is one small detail that we're forgetting
 - Ship _quality_ features as quick as possible
 
 Note:
-However, if we ship a feature that is buggy, or broken in some way, then this also doesn't provide benefit, and in extreme cases can actually reduce the benefit of the product. So really, we should be focused on shipping _quality_ features as quick as possible.
+If we ship a feature that is buggy, or broken in some way, then this also doesn't provide benefit, and in extreme cases can actually reduce the benefit of the product. So really, we should be focused on shipping _quality_ features as quick as possible.
 
 ---
 
@@ -600,3 +600,6 @@ PITest is smart, and will only run tests against mutations that have coverage, h
 - Our job is to ship *quality* features, fast
 - Mutation testing helps us ensure *quality*
 - PITest helps us do that *fast*
+
+Note:
+fix broken tests with mutation testing
