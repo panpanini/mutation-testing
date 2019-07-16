@@ -1,9 +1,3 @@
-buildscript {
-  dependencies {
-    classpath("pl.droidsonroids.gradle:gradle-pitest-plugin:${Versions.gradlePitestPlugin}")
-  }
-}
-
 plugins {
   id("pl.droidsonroids.pitest")
 }
