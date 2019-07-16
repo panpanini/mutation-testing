@@ -411,25 +411,6 @@ fun onNext(items: List<Item>) {
 Note:
 Back to our code from before, and bam, we're no longer building the models in our EpoxyController, so now our RecyclerView never gets updated.
 This might sound like not that big of a deal, I think more often than not we forget to test void calls in functions, as to do so you have to properly set up mocks and actively call them.
-
----
-@snap[north span-100]
-## Mutation testing
-### The better way
-@snapend
-
-1. Introduce a fault into production code
-2. Use code coverage to determine which tests to run
-3. Run tests
-4. Confirm if fault was detected or not
-5. Repeat
-
-
-Note:
-So, for our short snippet of code, we already have 4 mutations that we need to run the test suite against. If our test suite takes 5 minutes per run which is a pretty conservative estimate, then with just these 4 mutations we already have to spend 20 minutes testing these mutations, which isn't really realistic.
-
-instead, if we use code coverage to find out which tests are actually calling this section of code, we can restrict our test runs to only those specific tests, which greatly reduces the number of tests we have to run, and so also reduces the time spent testing mutations to a more reasonable level.
-
 ---
 @snap[north span-100]
 ## So what?
@@ -459,6 +440,24 @@ Show coverage hasn't changed
 
 Note:
 So hopefully from this small demo, you've seen why code coverage alone is not enough. Even though we had 100% code coverage, when we mutated our code, we saw that our coverage didn't change, and our tests still passed. What this tells us is that our test suite in its current state is missing test cases, so changes could sneak into our codebase, and our tests wouldn't warn us about them. Finding these un-checked code paths is what mutation testing is so useful for.
+
+---
+@snap[north span-100]
+## Mutation testing
+### The better way
+@snapend
+
+1. Introduce a fault into production code
+2. Use code coverage to determine which tests to run
+3. Run tests
+4. Confirm if fault was detected or not
+5. Repeat
+
+
+Note:
+So, for our short snippet of code, we already have 4 mutations that we need to run the test suite against. If our test suite takes 5 minutes per run which is a pretty conservative estimate, then with just these 4 mutations we already have to spend 20 minutes testing these mutations, which isn't really realistic.
+
+instead, if we use code coverage to find out which tests are actually calling this section of code, we can restrict our test runs to only those specific tests, which greatly reduces the number of tests we have to run, and so also reduces the time spent testing mutations to a more reasonable level.
 
 ---
 ## That's a lot of work you expect us to do there bud
