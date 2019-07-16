@@ -23,7 +23,7 @@
 @snapend
 
 Note:
-I'm a Software Engineer focusing on Android working at Mercari, a flea market application based in Japan and America.
+I'm a Software Engineer focusing on Android working at Mercari, a peer to peer market application based in Japan and America.
 ---
 
 @snap[north]
@@ -97,7 +97,7 @@ Finally, we come to tests. Tests can give us the quickest feedback in a way that
 @snapend
 
 - How do we know our tests are providing quality
-    - Use coverage to make sure that our tests are calling production code |
+- Use coverage to make sure that our tests are calling production code |
     - changes introduced will not break existing code |
     - new code does what it says on the tin |
 
@@ -114,6 +114,8 @@ Code coverage can also give us insurance that newly added features are working a
 
  ## Who watches the watchmen?
 
+Note:
+But who watches the watchmen?
 ---
 
 @snap[north span-100]
@@ -130,6 +132,9 @@ How do we know the quality of our tests?
 @snap[north span-100]
 ## What are tests
 @snapend
+
+Note:
+First of all, what is a test?
 ---
 
 @snap[north span-100]
@@ -165,7 +170,9 @@ However, what we forget is that _tests are designed to fail_. Our tests are supp
 - profit
 
 Note:
-In order to confirm that a unit test is working, we should make sure that they fail when we expect them to. And our expectations is that they will fail when the code no longer behaves the same way, so if we change the code behaviour, and our tests fail, we know that it is providing quality.
+In order to confirm that a unit test is working, we should make sure that they fail when we expect them to. Our expectations is that they will fail when the code no longer behaves the same way.
+
+So if we change the code behaviour, and our tests fail, we know that it is providing quality.
 
 why didn't anyone think of this earlier?
 
@@ -173,6 +180,8 @@ why didn't anyone think of this earlier?
 
 # Mutation testing
 
+Note:
+Welcome to the world of Mutation Testing!
 ---
 
 @snap[north span-100]
@@ -181,8 +190,9 @@ why didn't anyone think of this earlier?
 
 - proposed by Richard Lipton in 1971
 - computationally expensive, not a viable testing solution until recently
+
 Note:
-Like all good ideas, someone came up with it already. Mutation testing was originally proposed back in the 1970s, however it has only recently become viable thanks to advancements in computer processing.
+Like all good ideas, someone has already thought of it. Mutation testing was originally proposed back in the 1970s, however it has only recently become viable thanks to advancements in computer processing.
 ---
 @snap[north span-100]
 ## Mutation testing steps
@@ -194,9 +204,12 @@ Like all good ideas, someone came up with it already. Mutation testing was origi
 4. Repeat
 
 Note:
-The basic loop for a mutation test is as follows:
+The basic flow for a mutation test is as follows:
+
 first, we introduce a fault or mutation into the production code.
+
 next, we run our test suite and collect the results.
+
 and then third, we confirm if the fault was detected or not.
 We consider the fault "detected" if at least 1 test in the suite has failed.
 
@@ -414,7 +427,7 @@ This might sound like not that big of a deal, I think more often than not we for
 
 Note:
 So, for our short snippet of code, we already have 4 mutations that we need to run the test suite against. If our test suite takes 5 minutes per run which is a pretty conservative estimate, then with just these 4 mutations we already have to spend 20 minutes testing these mutations, which isn't really realistic.
-<next slide>
+
 instead, if we use code coverage to find out which tests are actually calling this section of code, we can restrict our test runs to only those specific tests, which greatly reduces the number of tests we have to run, and so also reduces the time spent testing mutations to a more reasonable level.
 
 ---
@@ -575,7 +588,8 @@ Finally I'd like to finish on a couple of tips and tricks for getting your pites
 
 Note:
 First, if you're using kotlin, then the pitest-kotlin plugin is great.
-Don't care about testing if `Intrinsics.checkParameterIsNotNull();` is removed, so this plugin will remove these mutations before they are tested, cleaning up the reports, and speeding up the test runtime.
+Because PITest works on editing the bytecode rather than the source code, it natively supports both Kotlin & Java which is nice, however any bytecode that is added by the Kotlin compiler, such as `Intrinsics.checkParameterIsNotNull()` which is added when we have a nullable parameter in a function. PITest doesn't know that this is not code we wrote ourselves, and so will try to make a mutant for this code.
+We can use the pitest-kotlin plugin to intercept and remove these mutations before they are tested, which will clean up our reports, and speed up the test runtime.
 
 ---
 
