@@ -491,7 +491,7 @@ PItest is a mutation testing system for the JVM, and it has some pretty sweet fe
 a) mutations are never saved to disk
 b) we don't have to pay the cost of loading the class for each test, so we gain some performance.
 
-But one of the coolest features is that someone has written a gradle plugin, so we can integrate it directly into our Android app
+But one of the coolest features is that someone has written a gradle plugin
 ---
 @snap[north span-100]
 ## Gradle plugin
@@ -503,7 +503,7 @@ But one of the coolest features is that someone has written a gradle plugin, so 
 - generates `pitest<Variant>` tasks
 
 Note:
-The gradle plugin for pitest is great, because its almost plug & play. After importing the plugin, and setting up the set of target classes, the plugin will generate pitest tasks for each build variant, which will do _everything_ for you. The only downside about it...
+The gradle plugin for pitest is great, because its almost 100% plug & play. After importing the plugin, and setting up the set of target classes, the plugin will generate pitest tasks for each build variant, which will do _everything_ for you. The only downside about it...
 
 ---
 
@@ -525,7 +525,7 @@ However, there is a fork that does work, so lets take a look at that
 - has some Android specific helpers (eg: generating mockable Android jar)
 
 Note:
-so koral on github has forked and fixed the pitest gradle plugin to work with Android, and added some extra helpers that are useful for Android projects, such as support for Robolectric. Installation is the same as the other gradle plugin, just apply the plugin to your build.gradle file and then declare which classes to test
+so koral on github has forked and fixed the pitest gradle plugin to work with Android, and added some extra helpers that are useful for Android projects, such as support for Robolectric.
 ---?code=src/main/kotlin/build.gradle.kts&lang=kotlin@name=build.gradle.kts
 
 @snap[north span-100]
@@ -533,11 +533,12 @@ so koral on github has forked and fixed the pitest gradle plugin to work with An
 @snapend
 
 Note:
-@[8](apply the plugin)
-@[11-15](add the pitest block)
-@[12](set this to false if using Robolectric)
-@[13](set the target classes)
-@[14](set the output format)
+Installation is the same as the other gradle plugin, just apply the plugin to your build.gradle file and then declare which classes to test
+@[2](apply the plugin)
+@[5-9](add the pitest block)
+@[6](set this to false if using Robolectric)
+@[7](set the target classes)
+@[8](set the output format)
 
 ---
 
@@ -606,13 +607,18 @@ PITest is smart, and will only run tests against mutations that have coverage, h
 
 ---
 @snap[north span-100]
-## Takeaways
+## Mutation Testing
+@snapend
+
+@snap[east]
+![repo-qr](assets/img/mutation_testing_repo_qr.png)
 @snapend
 
 
-- Our job is to ship *quality* features, fast
-- Mutation testing helps us ensure *quality*
-- PITest helps us do that *fast*
+
+- [panpanini/mutation_testing](https://github.com/panpanini/mutation_testing)
+- [Github: panpanini](https://www.github.com/panpanini)
+- [Twitter: panini_ja](https://www.twitter.com/panini_ja)
 
 Note:
 fix broken tests with mutation testing
