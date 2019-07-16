@@ -241,21 +241,62 @@ Note:
 We have a block of code, we change it slightly, which produces our mutant.
 
 ---?code=src/main/kotlin/SessionController.kt&lang=kotlin
-
+@snap[north span-100]
+## Creating mutations
+@snapend
 Note:
 Alright, lets start mutating some code! Take this class as an example. There are 3 functions here:
 
-@[5-9](setSessions)
-@[6-7](clear sessions, add all new)
-@[8](request that the current models be built)
-@[12-15](buildModels - generates the models, adds to the controller)
-@[13](calls generate models)
-@[14](adds each one to the Controller)
-@[18-33](generateModels)
-@[19-20](Takes the list of sessions)
-@[21](Creates a SessionModelInstance)
-@[22-30](Sets the session data to the model)
+---
+@snap[north span-100]
+## Creating mutations
+@snapend
+```
+fun setSessions(sessions: List<Session>) {
+    this.sessions.clear()
+    this.sessions.addAll(sessions)
+    requestModelBuild()
+}
+```
 
+Note:
+setSessions(), which will clear our currently held sessions, and add the new ones passed in the parameter, and then call requestModelBuild()
+---
+@snap[north span-100]
+## Creating mutations
+@snapend
+```
+override fun buildModels() {
+    generateModels(sessions)
+        .forEach { it.addTo(this) }
+}
+```
+
+Note:
+buildModels(), which generates a model for each of our sessions, and then adds that model to the controller,
+---
+@snap[north span-100]
+## Creating mutations
+@snapend
+```
+fun generateModels(sessions: List<Session>): List<SessionModel> {
+    return sessions
+        .map { session ->
+            SessionModel_()
+                .title(session.title)
+                .imageUrl(
+                    if (session.speaker.profileImage != "") {
+                        session.speaker.profileImage
+                    } else {
+                        null
+                    }
+                )
+        }
+}
+```
+
+Note:
+and finally generateModels(), which will map all of our sessions to a model, and then set the session data to the model.
 ---
 
 @snap[north span-100]
@@ -281,7 +322,7 @@ With that in mind, lets take a look at a couple of these as an example, arranged
 ## Conditionals boundary
 @snapend
 
-replaces relational operators with boundary counterpart
+Replaces relational operators with boundary counterpart
 
 | Original | Mutated |
 |-|-|
@@ -311,31 +352,6 @@ Note:
 So if we apply this to our previous code example, we come up with a mutant that looks like this. Now - thats pretty evil, this is definitely the kind of thing that could slip through code review, and this kind of edge case is unlikely to be covered by tests, unless you have gone out of your way to write a test specifically for this boundary.
 
 Our next contender is slightly more evil, the math operator
----
-@snap[north span-100]
-## Math
-@snapend
-
-
-replaces binary arithmetic operations
-
-| Original | Mutated |
-|-|-|
-| + | - |
-| - | + |
-| * | / |
-| / | * |
-
-Note:
-This lil critter will take your nicely crafted binary arithmetic and swap it all around. for example
----?code=src/main/kotlin/math.kt&lang=kotlin
-@snap[north span-100]
-## Math
-@snapend
-
-Note:
-did you notice the change?
-This one character change can easily lead to an `IndexOutOfBoundsException`
 
 ---
 @snap[north span-100]
@@ -343,7 +359,7 @@ This one character change can easily lead to an `IndexOutOfBoundsException`
 @snapend
 
 
-replaces conditional checks
+Negates conditional checks
 
 | Original | Mutated |
 |-|-|
@@ -362,23 +378,33 @@ Next we have the negate conditionals operator - are you seeing a pattern here? H
 ``` kotlin
 // original
 fun buildModels() {
-    ProgressModelView_()
-      .title(title)
-      ...
-      .addIf(model.state == State.IN_PROGRESS)
+  SessionModel_()
+      .title(session.title)
+      .imageUrl(
+          if (session.speaker.profileImage != "") {
+              session.speaker.profileImage
+          } else {
+              null
+          }
+      )
 }
 
 // mutated
 fun buildModels() {
-    ProgressModelView_()
-      .title(title)
-      ...
-      .addIf(model.state != State.IN_PROGRESS)
+  SessionModel_()
+      .title(session.title)
+      .imageUrl(
+          if (session.speaker.profileImage == "") {
+              session.speaker.profileImage
+          } else {
+              null
+          }
+      )
 }
 ```
 
 Note:
-This one is pretty evil too, as even just this change on its own can lead to wildly different behaviour of our app, in this case showing the Progress view whenever the state is _not_ in progress.
+This one is pretty evil too, as even just this change on its own can lead to wildly different behaviour of our app, in this case showing not showing a speaker profile whenever we have a valid image
 
 ---
 @snap[north span-100]
@@ -388,7 +414,7 @@ This one is pretty evil too, as even just this change on its own can lead to wil
 *removes* void method calls
 
 Note:
-The last mutator I want to show is the Remove void calls operator, this one straight up removes calls to void methods. just deletes them. gone.
+And lastly we have the Remove void calls operator, this one straight up removes calls to void methods. just deletes them. gone.
 
 ---
 @snap[north span-100]
@@ -397,14 +423,16 @@ The last mutator I want to show is the Remove void calls operator, this one stra
 
 ``` kotlin
 // original
-fun onNext(items: List<Item>) {
-    controller.items = items
-    controller.requestModelBuild()
+fun setSessions(sessions: List<Session>) {
+    this.sessions.clear()
+    this.sessions.addAll(sessions)
+    requestModelBuild()
 }
 
 // mutated
-fun onNext(items: List<Item>) {
-    controller.items = items
+fun setSessions(sessions: List<Session>) {
+    this.sessions.clear()
+    this.sessions.addAll(sessions)
 
 }
 ```
@@ -455,7 +483,7 @@ So hopefully from this small demo, you've seen why code coverage alone is not en
 
 
 Note:
-So, for our short snippet of code, we already have 4 mutations that we need to run the test suite against. If our test suite takes 5 minutes per run which is a pretty conservative estimate, then with just these 4 mutations we already have to spend 20 minutes testing these mutations, which isn't really realistic.
+So, for our short snippet of code, we already have 3 mutations that we need to run the test suite against. If our test suite takes 5 minutes per run which is a pretty conservative estimate, then with just these 4 mutations we already have to spend 15 minutes testing these mutations, which isn't really realistic.
 
 instead, if we use code coverage to find out which tests are actually calling this section of code, we can restrict our test runs to only those specific tests, which greatly reduces the number of tests we have to run, and so also reduces the time spent testing mutations to a more reasonable level.
 
