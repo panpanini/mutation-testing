@@ -4,7 +4,7 @@
 ## View the slides
 you can view the slides at the following link:
 
-https://gitpitch.com/panpanini/mutation_testing
+https://gitpitch.com/panpanini/mutation-testing
 
 
 ## Demo

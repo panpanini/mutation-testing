@@ -644,7 +644,7 @@ PITest is smart, and will only run tests against mutations that have coverage, h
 
 
 
-- [panpanini/mutation_testing](https://github.com/panpanini/mutation_testing)
+- [panpanini/mutation_testing](https://github.com/panpanini/mutation-testing)
 - [Github: panpanini](https://www.github.com/panpanini)
 - [Twitter: panini_ja](https://www.twitter.com/panini_ja)
 
