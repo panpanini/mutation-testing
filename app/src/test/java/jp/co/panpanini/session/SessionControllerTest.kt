@@ -69,7 +69,7 @@ class SessionControllerTest {
 
 
     @Test
-    fun `generateModels should set the imageUrl to an empty string if speaker profileImage is empty`() {
+    fun `generateModels should set the imageUrl to null if speaker profileImage is empty`() {
         val sessions: List<Session> = listOf(session.copy(speaker = speaker.copy(profileImage = "")))
 
         val result = target.generateModels(sessions).first()
