@@ -649,4 +649,4 @@ PITest is smart, and will only run tests against mutations that have coverage, h
 - [Twitter: panini_ja](https://www.twitter.com/panini_ja)
 
 Note:
-fix broken tests with mutation testing
+Thanks everyone for listening! Hopefully I sparked some interest in mutation testing today, if you would like to look at the slides they're available here at this QR code, or on Github along with the demo project, and if you have any questions you can reach out to me here or on Twitter
