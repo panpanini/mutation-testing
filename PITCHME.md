@@ -36,6 +36,10 @@ I'm a Software Engineer focusing on Android working at Mercari, a peer to peer m
 - Improve existing functionality
 
 Note:
+Client Engineer
+provide value
+tools -> ship / improve
+
 Like many of you here today, my job as a client engineer is about providing value to our customers, by solving problems. Our main tools for solving these problems are shipping features, and improving existing functionality. But the focus here is on shipping.
 
 ---
@@ -48,6 +52,18 @@ Like many of you here today, my job as a client engineer is about providing valu
 - Ship features as quick as possible
 
 Note:
+Before release, no benefit
+
+ship fast
+
+Architecture patterns
+
+Open source library
+
+CI
+
+forgetting
+
 Before a feature is released, the customer doesn't get any benifit out of it, so its our job to make sure we can get these features out as quick as we can. To do this, we have many tools at our disposal:
 
 Architecture patterns to reduce the cost of reading the code
@@ -67,6 +83,8 @@ This is all well and good, but there is one small detail that we're forgetting
 - Ship _quality_ features as quick as possible
 
 Note:
+buggy feature no benefit
+
 If we ship a feature that is buggy, or broken in some way, then this also doesn't provide benefit, and in extreme cases can actually reduce the benefit of the product. So really, we should be focused on shipping _quality_ features as quick as possible.
 
 ---
@@ -80,6 +98,14 @@ If we ship a feature that is buggy, or broken in some way, then this also doesn'
 - Tests |
 
 Note:
+how ensure quality?
+
+QA - see how others use the app
+
+Code review - depends on other engineers
+
+Tests - quickest feedback
+
 so, what are some of the ways that we can ensure quality of the features we are shipping?
 
 One big way is with a Quality Assurance team. I mean the hint is in the name, but having someone else look at the feature you are working on is great for seeing how other people use the app, and is a good way to figure out bugs and unexpected user journeys, however the feedback loop is quite long, and so can be inefficient if employed improperly.
@@ -102,6 +128,14 @@ Finally, we come to tests. Tests can give us the quickest feedback in a way that
     - new code does what it says on the tin |
 
 Note:
+do we know test are qualtiy?
+
+Code coverage - shows how much is being run
+
+insurance for changes
+
+new features working as intended
+
 So how do we know that our tests are providing quality?
 
 Well, we can use code coverage right? by using coverage, we can show how much of our code is being run by the tests, and so we then know how safe we are when changing the code.
@@ -146,6 +180,15 @@ First of all, what is a test?
 
 
 Note:
+confirming code working as we expect
+
+"this code should behave in a certain way"
+
+make tests pass
+happy green checkmark
+
+tests designed to fail
+
 Unit test are a way of confirming that a certain piece of code is working the way we expect it to work.
 
 - "this code should behave in a certain way, if it doesn't, then the test should fail"
@@ -170,6 +213,12 @@ However, what we forget is that _tests are designed to fail_. Our tests are supp
 - profit
 
 Note:
+confirm unit test will fail
+
+change behaviour -> fail
+
+why didn't any think of it earlier?
+
 In order to confirm that a unit test is working, we should make sure that they fail when we expect them to. Our expectations is that they will fail when the code no longer behaves the same way.
 
 So if we change the code behaviour, and our tests fail, we know that it is providing quality.
@@ -192,6 +241,10 @@ Welcome to the world of Mutation Testing!
 - computationally expensive, not a viable testing solution until recently
 
 Note:
+1970s
+
+advancements in computer processing
+
 Like all good ideas, someone has already thought of it. Mutation testing was originally proposed back in the 1970s, however it has only recently become viable thanks to advancements in computer processing.
 ---
 @snap[north span-100]
@@ -204,6 +257,15 @@ Like all good ideas, someone has already thought of it. Mutation testing was ori
 4. Repeat
 
 Note:
+basic flow:
+
+introduce fault
+
+run tests collect results
+
+confirm detected
+at least 1 test
+
 The basic flow for a mutation test is as follows:
 
 first, we introduce a fault or mutation into the production code.
@@ -223,6 +285,12 @@ We consider the fault "detected" if at least 1 test in the suite has failed.
 - A mutant is a biological entity which has undergone a change in its genetic structure.
 
 Note:
+wikipedia
+
+have a thing, copy, make new thing
+
+code definition
+
 If you have a look at Wikipedia, they describe a mutant as being a biological entity which has undergone a change in its genetic structure.
 
 Basically, you have one thing over here. you change it slightly, and then you get another thing. that other thing is a mutant of the first.
@@ -260,6 +328,12 @@ fun setSessions(sessions: List<Session>) {
 ```
 
 Note:
+clear old sessions
+
+add new sessions
+
+call requestModelBuild()
+
 setSessions(), which will clear our currently held sessions, and add the new ones passed in the parameter, and then call requestModelBuild()
 ---
 @snap[north span-100]
@@ -273,6 +347,10 @@ override fun buildModels() {
 ```
 
 Note:
+generate models for sessions
+
+add to controller
+
 buildModels(), which generates a model for each of our sessions, and then adds that model to the controller,
 ---
 @snap[north span-100]
@@ -296,6 +374,11 @@ fun generateModels(sessions: List<Session>): List<SessionModel> {
 ```
 
 Note:
+
+map session -> model
+
+set data to model
+
 and finally generateModels(), which will map all of our sessions to a model, and then set the session data to the model.
 ---
 
@@ -307,6 +390,16 @@ and finally generateModels(), which will map all of our sessions to a model, and
  - Coupling Effect |
 
 Note:
+randomly change code, run all tests, methodical
+
+well researched, two theories
+
+competent programmer Hypothesis
+
+coupling effect
+
+look at a couple, perceived evilness
+
 Now we could go randomly changing code to create mutants, but remember that for each mutant we create, we have to run all the tests against it to make sure it is killed, so we want to be methodical about the changes that we make.
 
 This is actually a fairly well researched area, so if you Google you can find lists of mutators for object-oriented languages, however the basic idea behind creating mutations follows these two theories.
@@ -332,6 +425,11 @@ Replaces relational operators with boundary counterpart
 | >= | > |
 
 Note:
+simple but common
+conditionals boundary operator
+
+consist of 2 things
+
 First lets start off with a fairly simple, but common one, the conditionals boundary operator. Mutation operators generally consist of two things - the original production code, and the code it should be mutated into.
 ---
 @snap[north span-100]
@@ -349,9 +447,14 @@ if (currentTime <= startTime) {
 }
 ```
 Note:
+apply to previous example, looks like this
+
+can you see? the less than became less than or equal
+
+slip through code view, unless test explicitly for boundary
+
 So if we apply this to our previous code example, we come up with a mutant that looks like this. Now - thats pretty evil, this is definitely the kind of thing that could slip through code review, and this kind of edge case is unlikely to be covered by tests, unless you have gone out of your way to write a test specifically for this boundary.
 
-Our next contender is slightly more evil, the math operator
 
 ---
 @snap[north span-100]
@@ -369,6 +472,12 @@ Negates conditional checks
 | > | <= |
 
 Note:
+Negate conditionsals
+
+patterns
+
+reverse
+
 Next we have the negate conditionals operator - are you seeing a pattern here? Here we take conditional checks, and reverse them.
 ---
 @snap[north span-100]
@@ -404,7 +513,11 @@ fun buildModels() {
 ```
 
 Note:
-This one is pretty evil too, as even just this change on its own can lead to wildly different behaviour of our app, in this case showing not showing a speaker profile whenever we have a valid image
+wildly different behaviour in app
+
+not showing speaker profile if valid image URL
+
+This one is pretty evil too, as even just this change on its own can lead to wildly different behaviour of our app, in this case showing not showing a speaker profile whenever we have a valid image URL
 
 ---
 @snap[north span-100]
@@ -437,6 +550,13 @@ fun setSessions(sessions: List<Session>) {
 }
 ```
 Note:
+back to code, bam no longer building models
+RecyclerView not updating
+
+not sound like big deal,
+
+actively call functions tests
+
 Back to our code from before, and bam, we're no longer building the models in our EpoxyController, so now our RecyclerView never gets updated.
 This might sound like not that big of a deal, I think more often than not we forget to test void calls in functions, as to do so you have to properly set up mocks and actively call them.
 ---
@@ -445,7 +565,7 @@ This might sound like not that big of a deal, I think more often than not we for
 @snapend
 
 Note:
-We have seen how to create mutations from our code, but what does it really mean? Obviously we're not just going to delete lines from our code, so how does this help us? Lets take a quick look at an example.
+We have seen how to create mutations from our code, but what does it really mean? so how does this help us? Lets take a quick look at an example.
 
 terminal: ⌥ + fn + F12
 
@@ -467,6 +587,12 @@ Show coverage hasn't changed
 - Code coverage, but better
 
 Note:
+coverage is not enough
+
+100% coverage, change code, no change
+
+good for finding untested codepaths
+
 So hopefully from this small demo, you've seen why code coverage alone is not enough. Even though we had 100% code coverage, when we mutated our code, we saw that our coverage didn't change, and our tests still passed. What this tells us is that our test suite in its current state is missing test cases, so changes could sneak into our codebase, and our tests wouldn't warn us about them. Finding these un-checked code paths is what mutation testing is so useful for.
 
 ---
@@ -483,7 +609,11 @@ So hopefully from this small demo, you've seen why code coverage alone is not en
 
 
 Note:
-So, for our short snippet of code, we already have 3 mutations that we need to run the test suite against. If our test suite takes 5 minutes per run which is a pretty conservative estimate, then with just these 4 mutations we already have to spend 15 minutes testing these mutations, which isn't really realistic.
+3 mutations, 5 minutes, 15 minutes
+
+code coverage, restrict test runs
+
+So, for our short snippet of code, we already have 3 mutations that we need to run the test suite against. If our test suite takes 5 minutes per run which is a pretty conservative estimate, then with just these 3 mutations we already have to spend 15 minutes testing these mutations, which isn't really realistic.
 
 instead, if we use code coverage to find out which tests are actually calling this section of code, we can restrict our test runs to only those specific tests, which greatly reduces the number of tests we have to run, and so also reduces the time spent testing mutations to a more reasonable level.
 
@@ -491,6 +621,16 @@ instead, if we use code coverage to find out which tests are actually calling th
 ## That's a lot of work you expect us to do there bud
 
 Note:
+you might be thinking
+
+another test suite
+
+mutant -> production
+
+shipping things quickly
+
+a lot of work
+
 you might be thinking
 "now hold up there, this is cool and all, but are you telling me that I now need to keep *another* test suite to test my test suite? what happens if the mutant code gets into my production code base? I thought we were supposed to be shipping things quickly? this all seems like a lot of work"
 and to that, I say *no*.
@@ -515,6 +655,18 @@ Let me introduce PITest!
 - Gradle plugin @emoji[heart_eyes_cat]
 
 Note:
+for JVM, sweet features
+
+generate mutations with mutator operator set
+
+editing bytecode
+
+mutations not saved to disk -> no prod
+
+performance -> loading class
+
+gradle plugin
+
 PItest is a mutation testing system for the JVM, and it has some pretty sweet features. It will automatically generate mutations based on the operator set provided. Also, the mutations are generated by editing the bytecode of a class after it has been loaded by the ClassLoader, which means that
 a) mutations are never saved to disk
 b) we don't have to pay the cost of loading the class for each test, so we gain some performance.
@@ -531,6 +683,14 @@ But one of the coolest features is that someone has written a gradle plugin
 - generates `pitest<Variant>` tasks
 
 Note:
+100% plug & play
+
+import plugin, set target classes
+
+generate build variant tasks
+
+downside
+
 The gradle plugin for pitest is great, because its almost 100% plug & play. After importing the plugin, and setting up the set of target classes, the plugin will generate pitest tasks for each build variant, which will do _everything_ for you. The only downside about it...
 
 ---
@@ -553,6 +713,10 @@ However, there is a fork that does work, so lets take a look at that
 - has some Android specific helpers (eg: generating mockable Android jar)
 
 Note:
+koral forked
+
+extra helpers -> Robolectric
+
 so koral on github has forked and fixed the pitest gradle plugin to work with Android, and added some extra helpers that are useful for Android projects, such as support for Robolectric.
 ---?code=src/main/kotlin/build.gradle.kts&lang=kotlin@name=build.gradle.kts
 
@@ -561,6 +725,18 @@ so koral on github has forked and fixed the pitest gradle plugin to work with An
 @snapend
 
 Note:
+installation
+
+plugin
+
+pitest
+
+Robolectric
+
+target classes
+
+output format
+
 Installation is the same as the other gradle plugin, just apply the plugin to your build.gradle file and then declare which classes to test
 @[2](apply the plugin)
 @[5-9](add the pitest block)
@@ -615,6 +791,16 @@ Finally I'd like to finish on a couple of tips and tricks for getting your pites
 - Removes mutants for Kotlin generated code
 
 Note:
+editing bytecode -> implicit support
+
+Kotlin compiler generated code
+
+Intrinsics.checkParameterIsNotNull()
+
+we didn't write, don't want to test
+
+plugin intercepts
+
 First, if you're using kotlin, then the pitest-kotlin plugin is great.
 Because PITest works on editing the bytecode rather than the source code, it natively supports both Kotlin & Java which is nice, however any bytecode that is added by the Kotlin compiler, such as `Intrinsics.checkParameterIsNotNull()` which is added when we have a nullable parameter in a function. PITest doesn't know that this is not code we wrote ourselves, and so will try to make a mutant for this code.
 We can use the pitest-kotlin plugin to intercept and remove these mutations before they are tested, which will clean up our reports, and speed up the test runtime.
@@ -625,12 +811,27 @@ We can use the pitest-kotlin plugin to intercept and remove these mutations befo
 
 
 Note:
+Integration test potential variables
+
+connected to DB / API
+
+performance
+
 Integration tests have too many potential variables, + could potentially be connected to DBs etc which will do bad things if you remove certain calls without mocking.
 ---
 
 ## Run PITest on CI
 
 Note:
+PITest smart, not fast
+
+monolithic
+6min, 10min, git hook
+
+CI
+
+git push
+
 PITest is smart, and will only run tests against mutations that have coverage, however it still isn't the fastest. For example, the monolithic project I'm working on now takes about 6 minutes to run all the tests, and roughly 10 minutes to run pitest. This is a bit too long for my liking to run as a git-hook, so for this project we set up pitest to run on CI when a Pull Request is made. However, if you have a more modularized project, you could run pitest as a git-hook before you push to your remote, to make sure that your tests are covering all possible code paths
 
 ---
@@ -649,4 +850,12 @@ PITest is smart, and will only run tests against mutations that have coverage, h
 - [Twitter: panini_ja](https://www.twitter.com/panini_ja)
 
 Note:
+Thanks
+
+sparked interest, stable app
+
+QR -> github + slides
+
+Twitter
+
 Thanks everyone for listening! Hopefully I sparked some interest in mutation testing today, if you would like to look at the slides they're available here at this QR code, or on Github along with the demo project, and if you have any questions you can reach out to me here or on Twitter
