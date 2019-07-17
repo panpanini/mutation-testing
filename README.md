@@ -4,8 +4,7 @@
 ## View the slides
 you can view the slides at the following link:
 
-https://gitpitch.com/panpanini/mutation-testing
-
+https://speakerdeck.com/panini/fixing-broken-robots-android-mutation-testing
 
 ## Demo
 
